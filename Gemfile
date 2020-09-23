@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.0'
 
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
+
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'mysql2', '>= 0.4.4'
 gem 'puma', '~> 4.1'
 gem 'rspec-rails', '~> 4.0.1'
