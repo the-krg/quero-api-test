@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
+  adapter: mysql2
+  url: <%= ENV['DATABASE_URL'] %>
   database: appQ_production
   username: appQ
   password: <%= ENV['APPQ_DATABASE_PASSWORD'] %>
