@@ -5,12 +5,12 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
 
-    render json: @courses
+    render json: JSON.pretty_generate(@courses.as_json)
   end
 
   # GET /courses/1
   def show
-    render json: @course
+    render json: JSON.pretty_generate(CourseSerializer.new(@course).as_json)
   end
 
   # POST /courses

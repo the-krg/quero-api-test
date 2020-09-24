@@ -5,12 +5,12 @@ class OffersController < ApplicationController
   def index
     @offers = Offer.all
 
-    render json: @offers
+    render json: JSON.pretty_generate(@offers.as_json)
   end
 
   # GET /offers/1
   def show
-    render json: @offer
+    render json: JSON.pretty_generate(OfferSerializer.new(@offer).as_json)
   end
 
   # POST /offers
@@ -46,6 +46,6 @@ class OffersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def offer_params
-      params.require(:offer).permit(:full_price, :discount_percentage, :start_date, :enrollment_semester, :course_id)
+      params.require(:offer).permit(:full_price, :discount_percentage, :start_date, :enrollment_semester, :course_id, :university_id, :campus_id)
     end
 end

@@ -5,12 +5,12 @@ class CampusesController < ApplicationController
   def index
     @campuses = Campus.all
 
-    render json: @campuses
+    render json: JSON.pretty_generate(@campuses.as_json)
   end
 
   # GET /campuses/1
   def show
-    render json: @campus
+    render json: JSON.pretty_generate(@campus.as_json)
   end
 
   # POST /campuses
