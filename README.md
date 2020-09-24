@@ -32,3 +32,19 @@ rails db:create
 * Usage:
 This is an API-only application, so you can only make HTTP requests to it. Try GETting to 
 www.localhost:3000/offers, for example.
+
+Filters:
+- Offers:\
+&course_name=name\
+&course_kind=kind\
+&course_level=level\
+&course_shift=shift\
+&city=name\
+&university_name=name
+
+- Courses:\
+&name=name\
+&kind=kind\
+&level=level\
+&shift=shift\
+&university_name=name
