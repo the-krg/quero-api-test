@@ -7,7 +7,6 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'mysql2', '>= 0.4.4'
-gem 'activerecord-mysql2-adapter'
 gem 'puma', '~> 4.1'
 
 # Use Active Model has_secure_password
