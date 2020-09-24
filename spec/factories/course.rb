@@ -5,5 +5,6 @@ FactoryBot.define do
     level { Faker::Educator.degree }
     shift { %w(Day Night).sample }
     campus { create(:campus) }
+    university { campus.university }
   end
 end
