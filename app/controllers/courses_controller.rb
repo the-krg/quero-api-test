@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   # GET /courses
   def index
-    @courses = Course.all
+    @courses = Course.filter(filter_params)
 
     render json: JSON.pretty_generate(@courses.as_json)
   end
@@ -39,6 +39,9 @@ class CoursesController < ApplicationController
   end
 
   private
+    def filter_params
+      params.permit(:name, :kind, :shift, :level, :university_name)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])

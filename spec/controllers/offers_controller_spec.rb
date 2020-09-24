@@ -6,12 +6,66 @@ describe OffersController, type: :controller do
   describe '#index' do
     subject { get :index }
 
-    before { offer }
+    context 'with blank parameters' do
+      before { offer }
 
-    it 'returns a collection of Offers' do
-      body = JSON.parse(subject.body)
+      it 'returns a collection of Offers' do
+        body = JSON.parse(subject.body)
 
-      expect(body.first['id']).to eq(offer.id)
+        expect(body.first['id']).to eq(offer.id)
+      end
+    end
+
+    context 'when ordering by price_with_discount' do
+      subject { get(:index, params: { order: order }) }
+
+      let!(:smaller) { create(:offer, price_with_discount: 1.0) }
+      let!(:bigger) { create(:offer, price_with_discount: 100.0) }
+
+      context 'ordering ASC' do
+        let(:order) { 'asc' }
+
+        it 'returns the smaller record first' do
+          body = JSON.parse(subject.body)
+
+          expect(body.first['id']).to eq(smaller.id)
+        end
+      end
+
+      context 'ordering DESC' do
+        let(:order) { 'desc' }
+
+        it 'returns the bigger record first' do
+          body = JSON.parse(subject.body)
+
+          expect(body.first['id']).to eq(bigger.id)
+        end
+      end
+    end
+
+    context 'when filtering' do
+      context 'by course' do
+        let(:correct_course_name) { 'Foo' }
+        let(:incorrect_course_name) { 'Bar' }
+        let(:course) { create(:course, name: correct_course_name) }
+        let(:other_course) { create(:course, name: incorrect_course_name) }
+        let!(:offer) { create(:offer, course: course) }
+        let!(:incorrect_offer) { create(:offer, course: other_course) }
+
+        subject { get(:index, params: { course_name: correct_course_name }) }
+
+        it 'returns only the Offer with the course' do
+          body = JSON.parse(subject.body)
+
+          expect(body.pluck('course_id')).to include(course.id)
+        end
+
+        it 'does not return the incorrect course' do
+          body = JSON.parse(subject.body)
+
+          expect(body.pluck('course_id')).to_not include(other_course.id)
+        end
+      end
     end
   end
 
