@@ -1,24 +1,34 @@
-# README
+# APP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicação para listagem de cursos, ofertas, universidades e seus campi.
 
-Things you may want to cover:
+Requisitos:
 
-* Ruby version
-
-* System dependencies
+* Ruby version: 2.7.0
 
 * Configuration
 
-* Database creation
+```shell script
+git clone git@github.com:the-krg/quero-api-test.git
 
-* Database initialization
+cd appQ
 
-* How to run the test suite
+bundle install
 
-* Services (job queues, cache servers, search engines, etc.)
+rails db:create db:migrate db:seed
 
-* Deployment instructions
+rails s
+````
 
-* ...
+* Database creation:
+`
+rails db:create
+`
+
+* Database initialization: `rails db:migrate`
+
+* How to run the test suite: `rspec` or `bundle exec rspec`
+
+* Usage:
+This is an API-only application, so you can only make HTTP requests to it. Try GETting to 
+www.localhost:3000/offers, for example.
