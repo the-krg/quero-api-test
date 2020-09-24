@@ -4,8 +4,4 @@ class OfferSerializer < ActiveModel::Serializer
   belongs_to :course
   belongs_to :university
   belongs_to :campus
-
-  def price_with_discount
-    object.full_price - ((object.full_price * object.discount_percentage)/100).truncate(2)
-  end
 end

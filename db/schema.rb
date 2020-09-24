@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_192957) do
+ActiveRecord::Schema.define(version: 2020_09_24_193122) do
 
   create_table "campuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 2020_09_23_192957) do
     t.string "kind"
     t.string "level"
     t.string "shift"
+    t.bigint "university_id", null: false
     t.bigint "campus_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "university_id"
     t.index ["campus_id"], name: "index_courses_on_campus_id"
     t.index ["university_id"], name: "index_courses_on_university_id"
   end
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_192957) do
     t.boolean "enabled", default: true
     t.bigint "campus_id"
     t.bigint "university_id"
+    t.float "price_with_discount", null: false
     t.index ["campus_id"], name: "index_offers_on_campus_id"
     t.index ["course_id"], name: "index_offers_on_course_id"
     t.index ["university_id"], name: "index_offers_on_university_id"
